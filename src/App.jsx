@@ -54,7 +54,7 @@ export default function App() {
 
 
   useEffect(function() {
-    fetch("http://localhost:5000/profile")
+    fetch("https://nfc-businesscard-website-backend.onrender.com/profile")
       .then(function(response) {
         return response.json();
       })
@@ -67,7 +67,7 @@ export default function App() {
 
 
   function downloadContactFile() {
-    window.location.href = "http://localhost:5000/downloadClientContact?region=" + encodeURIComponent(selectedRegion);
+    window.location.href = "https://nfc-businesscard-website-backend.onrender.com/downloadClientContact?region=" + encodeURIComponent(selectedRegion);
   }
 
 
@@ -81,7 +81,7 @@ export default function App() {
       location: selectedRegion,
     };
 
-    var response = await fetch("http://localhost:5000/submitNumber", {
+    var response = await fetch("https://nfc-businesscard-website-backend.onrender.com/submitNumber", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
@@ -226,7 +226,7 @@ export default function App() {
 
           {formSubmitted ? (
             <div style={{ backgroundColor: "#f0f9f4", padding: "14px 16px" }}>
-              <p style={{ fontSize: "14px", fontWeight: 500 }}>Got it — I'll be in touch soon.</p>
+              <p style={{ fontSize: "14px", fontWeight: 500 }}>Got it — I\'ll be in touch soon.</p>
             </div>
           ) : (
             <form onSubmit={handleContactSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
