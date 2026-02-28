@@ -73,9 +73,9 @@ export default function AdminSettings() {
     if (isLoggedIn === false) {
       return;
     }
-    fetch("http://localhost:5000/profile").then(function(r) { return r.json(); }).then(function(data) { setProfileSettings(data); });
-    fetch("http://localhost:5000/chatbotSettings").then(function(r) { return r.json(); }).then(function(data) { setChatbotSettings(data); });
-    fetch("http://localhost:5000/admin/email-config").then(function(r) { return r.json(); }).then(function(data) { setSenderEmail(data.sender_email || ""); });
+    fetch("https://nfc-businesscard-website-backend.onrender.com/profile").then(function(r) { return r.json(); }).then(function(data) { setProfileSettings(data); });
+    fetch("https://nfc-businesscard-website-backend.onrender.com/chatbotSettings").then(function(r) { return r.json(); }).then(function(data) { setChatbotSettings(data); });
+    fetch("https://nfc-businesscard-website-backend.onrender.com/admin/email-config").then(function(r) { return r.json(); }).then(function(data) { setSenderEmail(data.sender_email || ""); });
   }, [isLoggedIn]);
 
 
@@ -114,7 +114,7 @@ export default function AdminSettings() {
   }
 
   async function saveAllChanges() {
-    await fetch("http://localhost:5000/admin/updateAll", {
+    await fetch("https://nfc-businesscard-website-backend.onrender.com/admin/updateAll", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ settings: profileSettings, chatbot: chatbotSettings }),
@@ -124,7 +124,7 @@ export default function AdminSettings() {
   }
 
   async function saveEmailCredentials() {
-    await fetch("http://localhost:5000/admin/updateEmail", {
+    await fetch("https://nfc-businesscard-website-backend.onrender.com/admin/updateEmail", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ sender_email: senderEmail, sender_password: senderPassword }),
@@ -219,7 +219,7 @@ export default function AdminSettings() {
         <div style={cardStyle}>
           <h2 style={{ fontFamily: titleFont, fontSize: "18px", color: mainOrange }}>Regions & numbers</h2>
           <p style={{ fontSize: "13px", color: "#7a4000" }}>
-            Each region gets its own phone number. Users pick their region to download the right contact. You can add more numbers and regions.
+            Each region gets its own phone number. Users pick their region to download the right contact.
           </p>
 
           {Object.keys(profileSettings.locations).map(function(regionName) {
@@ -255,7 +255,7 @@ export default function AdminSettings() {
 
             <label style={{ fontSize: "13px", fontWeight: 500, color: "#7a4000" }}>Region name</label>
             <input
-              placeholder="location or neighborhood name, e.g. 'Suffolk County'"
+              placeholder="e.g. Brooklyn"
               value={newRegionName}
               onChange={function(e) { setNewRegionName(e.target.value); }}
               style={inputStyle}
@@ -263,7 +263,7 @@ export default function AdminSettings() {
 
             <label style={{ fontSize: "13px", fontWeight: 500, color: "#7a4000" }}>Phone number</label>
             <input
-              placeholder="123-456-7890"
+              placeholder="(555) 000-0000"
               value={newRegionNumber}
               onChange={function(e) { setNewRegionNumber(e.target.value); }}
               style={inputStyle}
@@ -290,7 +290,7 @@ export default function AdminSettings() {
             value={chatbotSettings.script || ""}
             onChange={function(e) { setChatbotSettings({ ...chatbotSettings, script: e.target.value }); }}
             style={{ ...inputStyle, minHeight: "130px", resize: "vertical" }}
-            placeholder="Summary... I do these things... I don't do these things...Use my bio... I like these... Recommendations based on situation... ect"
+            placeholder="e.g. You are a helpful assistant for a real estate agent. Answer questions professionally."
           />
 
           <label style={{ fontSize: "13px", fontWeight: 500, color: "#7a4000" }}>FAQ (optional)</label>
@@ -312,7 +312,7 @@ export default function AdminSettings() {
             value={profileSettings.pricing || ""}
             onChange={function(e) { setProfileSettings({ ...profileSettings, pricing: e.target.value }); }}
             style={{ ...inputStyle, minHeight: "90px", resize: "vertical" }}
-            placeholder="Pricing information to show on the appointments page."
+            placeholder="e.g. Free consultation. Commission-based pricing."
           />
         </div>
 
@@ -320,7 +320,7 @@ export default function AdminSettings() {
         <div style={cardStyle}>
           <h2 style={{ fontFamily: titleFont, fontSize: "18px", color: mainOrange }}>Email credentials</h2>
           <p style={{ fontSize: "13px", color: "#7a4000" }}>
-            Used to send denial/acceptance emails. Get an App Password at myaccount.google.com. You have to go to Security and enable 2FA. Then search app password and create one. 
+            Used to send denial emails. Get an App Password at myaccount.google.com → Security → App Passwords.
           </p>
           <label style={{ fontSize: "13px", fontWeight: 500, color: "#7a4000" }}>Gmail address</label>
           <input
@@ -339,7 +339,7 @@ export default function AdminSettings() {
             style={inputStyle}
           />
           <p style={{ fontSize: "12px", color: "#9a4000", marginTop: "-4px" }}>
-            This is not your regular Gmail password. Follow the given steps to get an app password. 
+            This is NOT your regular Gmail password — generate a 16-character App Password from your Google account.
           </p>
           <button
             onClick={saveEmailCredentials}
