@@ -51,7 +51,7 @@ export default function Chatbuddy() {
     var historyWithUserMessage = messageHistory.concat({ who: "user", text: textToSend });
     setMessageHistory(historyWithUserMessage);
     setIsWaiting(true);
-    var response = await fetch("http://localhost:5000/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message: textToSend }) });
+    var response = await fetch("https://nfc-businesscard-website-backend.onrender.com/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message: textToSend }) });
     var responseData = await response.json();
     var botReplyText = responseData.reply;
     var historyWithBotReply = historyWithUserMessage.concat({ who: "bot", text: botReplyText });
