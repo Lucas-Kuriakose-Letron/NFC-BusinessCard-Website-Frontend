@@ -53,7 +53,7 @@ export default function Appointments() {
   var [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(function() {
-    fetch("http://localhost:5000/profile")
+    fetch("https://nfc-businesscard-website-backend.onrender.com/profile")
       .then(function(response) { return response.json(); })
       .then(function(data) { setProfileData(data); });
   }, []);
@@ -68,7 +68,7 @@ export default function Appointments() {
       time:  preferredTime,
     };
 
-    var response = await fetch("http://localhost:5000/requestAppointment", {
+    var response = await fetch("https://nfc-businesscard-website-backend.onrender.com/requestAppointment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(appointmentData),
@@ -120,15 +120,15 @@ export default function Appointments() {
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
 
               <label style={{ fontSize: "13px", fontWeight: 500, color: "#4a4540" }}>Your name</label>
-              <input placeholder="Name" value={fullName} onChange={function(e) { setFullName(e.target.value); }} style={inputStyle} required />
+              <input placeholder="e.g. Alex Rivera" value={fullName} onChange={function(e) { setFullName(e.target.value); }} style={inputStyle} required />
 
               <label style={{ fontSize: "13px", fontWeight: 500, color: "#4a4540" }}>Phone number</label>
-              <input type="tel" placeholder="123-456-7890" value={phoneNumber} onChange={function(e) { setPhoneNumber(e.target.value); }} style={inputStyle} required />
+              <input type="tel" placeholder="(555) 000-0000" value={phoneNumber} onChange={function(e) { setPhoneNumber(e.target.value); }} style={inputStyle} required />
 
               <label style={{ fontSize: "13px", fontWeight: 500, color: "#4a4540" }}>Email address</label>
-              <input type="email" placeholder="example@gmail.com" value={emailAddress} onChange={function(e) { setEmailAddress(e.target.value); }} style={inputStyle} required />
+              <input type="email" placeholder="you@example.com" value={emailAddress} onChange={function(e) { setEmailAddress(e.target.value); }} style={inputStyle} required />
               <p style={{ fontSize: "12px", color: "#9c9189", marginTop: "-6px" }}>
-                You'll get an email if your request can or can't be approved.
+                You'll get an email if your request can't be approved.
               </p>
 
               <label style={{ fontSize: "13px", fontWeight: 500, color: "#4a4540" }}>Preferred date</label>
