@@ -61,17 +61,17 @@ export default function AdminDashboard() {
     if (isLoggedIn === false) {
       return;
     }
-    fetch("http://localhost:5000/admin/numbers").then(function(response) { return response.json(); }).then(function(data) { setContactsList(data); });
-    fetch("http://localhost:5000/admin/appointments").then(function(response) { return response.json(); }).then(function(data) { setAppointmentsList(data); });
+    fetch("https://nfc-businesscard-website-backend.onrender.com/admin/numbers").then(function(response) { return response.json(); }).then(function(data) { setContactsList(data); });
+    fetch("https://nfc-businesscard-website-backend.onrender.com/admin/appointments").then(function(response) { return response.json(); }).then(function(data) { setAppointmentsList(data); });
   }, [isLoggedIn]);
 
   async function updateAppointmentStatus(appointmentIndex, newStatus) {
-    await fetch("http://localhost:5000/admin/updateAppointment", {
+    await fetch("https://nfc-businesscard-website-backend.onrender.com/admin/updateAppointment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ index: appointmentIndex, status: newStatus }),
     });
-    fetch("http://localhost:5000/admin/appointments")
+    fetch("https://nfc-businesscard-website-backend.onrender.com/admin/appointments")
       .then(function(response) { return response.json(); })
       .then(function(data) { setAppointmentsList(data); });
   }
@@ -156,7 +156,7 @@ export default function AdminDashboard() {
                   )}
                 </div>
                 <button
-                  onClick={function() { window.open("http://localhost:5000/admin/download/" + index); }}
+                  onClick={function() { window.open("https://nfc-businesscard-website-backend.onrender.com/admin/download/" + index); }}
                   style={{ padding: "6px 11px", border: "1px solid " + borderColor, backgroundColor: bgColor, cursor: "pointer", fontSize: "12px", color: mainOrange, flexShrink: 0 }}
                 >
                   ⬇ .vcf
