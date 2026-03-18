@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-var ADMIN_PASSWORD = "JamesWesleyCSIA";
+var ADMIN_PASSWORD = "CSIA";
 var bgColor = "rgb(255, 209, 134)";
 var mainOrange = "#ff6600";
 var textColor = "#333333";
